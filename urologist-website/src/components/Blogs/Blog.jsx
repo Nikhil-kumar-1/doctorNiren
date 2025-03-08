@@ -10,7 +10,7 @@ const Blog = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const response = await fetch(`${backendUrl}/api/blogs`,{method:GET});
+        const response = await fetch(`${backendUrl}/api/blogs`);
         const data = await response.json();
         setBlogs(data);
       } catch (error) {
