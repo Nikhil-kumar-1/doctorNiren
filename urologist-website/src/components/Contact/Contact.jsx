@@ -89,8 +89,12 @@ export default function ContactUs() {
         </div>
 
         <div className="w-full md:w-1/2 p-4 text-gray-700">
-          <h3 className="text-xl font-semibold mb-4">Clinic Details</h3>
-          <p><strong>📍 Address:</strong> New Delhi - 110068</p>
+        <h3 className="text-xl font-semibold mb-4">Clinic Details</h3>
+          <p>
+            <strong>📍 Address:</strong> E 33, Paryavaran Complex, IGNOU Road, Z
+            Morh, Near Labour Chowk, Near Saket Metro Station, New Delhi -
+            110068
+          </p>
           <p><strong>📞 Phone:</strong> +91 9811144680</p>
           <p><strong>✉️ Email:</strong> example@gmail.com</p>
             {/* Google Map Embed */}
