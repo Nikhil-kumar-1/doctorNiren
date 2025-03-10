@@ -141,7 +141,7 @@ const AdminDashboard = () => {
   // Handle appointment deletion
   const handleDelete = async (appointmentId) => {
     try {
-      const response = await fetch(`/api/appointments/${appointmentId}`, {
+      const response = await fetch(`${backendUrl}/api/appointments/${appointmentId}`, {
         method: "DELETE",
       });
       if (!response.ok) {
