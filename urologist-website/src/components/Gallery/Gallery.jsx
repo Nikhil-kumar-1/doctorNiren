@@ -43,12 +43,12 @@ export default function Gallery() {
         </div>
       )}
        <div className="mt-10 text-center">
-          <a
-            href="/appointment"
+          
+          <Link to="/appointment"
             className="bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 transition"
           >
             Book an Appointment
-          </a>
+          </Link>
         </div>
     </div>
   );

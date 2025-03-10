@@ -119,7 +119,7 @@ export default function Navbar() {
               },
               {
                 name: "Erectile Dysfunction",
-                path: "/services/erectileDisfunction", // Direct path without subItems
+                path: "/services/erectileDysfunction", // Direct path without subItems
               },
               {
                 name: "Circumcision Surgery",

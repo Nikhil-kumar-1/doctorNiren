@@ -20,7 +20,7 @@ export default function Footer() {
     { name: "Prostate Cancer Treatment", path: "/services/prostate-cancer" },
     { name: "Prostate Treatment", path: "/services/prostate-treatment" },
     { name: "Infertility", path: "/services/infertility" },
-    {name: "Erectile Dysfunction",path: "/services/erectileDisfunction", // Direct path without subItems
+    {name: "Erectile Dysfunction",path: "/services/erectileDysfunction", // Direct path without subItems
     },
     { name: "Circumcision", path: "/services/circumcision" },
   ];
