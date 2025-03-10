@@ -9,7 +9,7 @@ const authRoutes = require("./routes/authRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 const commentRoutes = require("./routes/commentRoutes"); // Import comment routes
 const visitRoutes = require("./routes/visitRoutes");
-import contactRoutes from "./routes/contactRoutes.js";
+const contactRoutes = require("./routes/contactRoutes")
 
 const app = express();
 
@@ -36,7 +36,7 @@ app.use("/api/auth", authRoutes); // Authentication routes
 app.use("/api/admin", adminRoutes); // Admin routes
 app.use("/api", commentRoutes); // Comment routes
 app.use("/api", visitRoutes);  //VisitRoutes
-pp.use("/api", contactRoutes);
+app.use("/api", contactRoutes);
 
 // Start the server
 const PORT = process.env.PORT || 5000;

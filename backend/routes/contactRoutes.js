@@ -1,7 +1,8 @@
-import express from "express";
-import Contact from "../models/Contact.js";
-
+const express = require("express");
 const router = express.Router();
+const Contact = require("../models/Contact");
+
+
 
 // Save a new contact message
 router.post("/contact", async (req, res) => {
@@ -25,4 +26,4 @@ router.get("/admin/contacts", async (req, res) => {
   }
 });
 
-export default router;
+module.exports=router;

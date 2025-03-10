@@ -56,7 +56,7 @@ const AdminDashboard = () => {
 useEffect(() => {
   const fetchContacts = async () => {
     try {
-      const response = await fetch(`${backendUrl}/api/contacts`);
+      const response = await fetch(`${backendUrl}/api/admin/contacts`);
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
