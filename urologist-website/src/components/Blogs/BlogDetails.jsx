@@ -1,25 +1,61 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { backendUrl } from "../../config/config";
+
 const BlogDetails = () => {
   const { id } = useParams(); // Get the blog ID from the URL
   const [blog, setBlog] = useState(null);
+  const [comments, setComments] = useState([]);
+  const [newComment, setNewComment] = useState("");
 
-  // Fetch the blog details from the backend
+  // Fetch the blog details and comments from the backend
   useEffect(() => {
-    const fetchBlog = async () => {
+    const fetchBlogAndComments = async () => {
       try {
-        const response = await fetch(`${backendUrl}/api/blogs/${id}`);
-        const data = await response.json();
-        console.log("Fetched blog data:", data); // Debugging line
-        setBlog(data);
+        // Fetch blog details
+        const blogResponse = await fetch(`${backendUrl}/api/blogs/${id}`);
+        if (!blogResponse.ok) {
+          throw new Error("Failed to fetch blog details");
+        }
+        const blogData = await blogResponse.json();
+        setBlog(blogData);
+
+        // Fetch comments for the blog
+        const commentsResponse = await fetch(`${backendUrl}/api/blogs/${id}/comments`);
+        if (!commentsResponse.ok) {
+          throw new Error("Failed to fetch comments");
+        }
+        const commentsData = await commentsResponse.json();
+        setComments(commentsData);
       } catch (error) {
-        console.error("Error fetching blog details:", error);
+        console.error("Error fetching blog details or comments:", error);
       }
     };
 
-    fetchBlog();
+    fetchBlogAndComments();
   }, [id]);
+
+  // Handle comment submission
+  const handleCommentSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(`${backendUrl}/api/blogs/${id}/comments`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ content: newComment, author: "Current User" }), // Replace "Current User" with the actual user
+      });
+      if (!response.ok) {
+        throw new Error("Failed to submit comment");
+      }
+      const data = await response.json();
+      setComments([...comments, data]); // Add the new comment to the list
+      setNewComment(""); // Clear the comment input
+    } catch (error) {
+      console.error("Error submitting comment:", error);
+    }
+  };
 
   if (!blog) {
     return <div className="text-center py-8">Loading...</div>;
@@ -45,18 +81,53 @@ const BlogDetails = () => {
 
         {/* Blog Content */}
         <div
-          className="text-gray-700 space-y-4" // Added space-y-4 for spacing between elements
+          className="text-gray-700 space-y-4"
           dangerouslySetInnerHTML={{
             __html: blog.content
-              .replace(/<h1>/g, '<h1 class="text-3xl font-bold mb-4">') // Style h1
-              .replace(/<h2>/g, '<h2 class="text-2xl font-bold mb-3">') // Style h2
-              .replace(/<h3>/g, '<h3 class="text-xl font-bold mb-2">') // Style h3
-              .replace(/<p>/g, '<p class="mb-4">') // Style paragraphs
-              .replace(/<ul>/g, '<ul class="list-disc list-inside mb-4">') // Style unordered lists
-              .replace(/<ol>/g, '<ol class="list-decimal list-inside mb-4">') // Style ordered lists
-              .replace(/<li>/g, '<li class="mb-2">') // Style list items
+              .replace(/<h1>/g, '<h1 class="text-3xl font-bold mb-4">')
+              .replace(/<h2>/g, '<h2 class="text-2xl font-bold mb-3">')
+              .replace(/<h3>/g, '<h3 class="text-xl font-bold mb-2">')
+              .replace(/<p>/g, '<p class="mb-4">')
+              .replace(/<ul>/g, '<ul class="list-disc list-inside mb-4">')
+              .replace(/<ol>/g, '<ol class="list-decimal list-inside mb-4">')
+              .replace(/<li>/g, '<li class="mb-2">'),
           }}
         />
+      </div>
+
+      {/* Comment Section */}
+      <div className="max-w-full mx-auto bg-white p-6 lg:p-8 rounded-lg shadow-md mt-5 mb-8">
+        <h2 className="text-2xl font-bold text-gray-800 mb-6">Comments</h2>
+
+        {/* Comment Form */}
+        <form onSubmit={handleCommentSubmit} className="mb-6">
+          <textarea
+            value={newComment}
+            onChange={(e) => setNewComment(e.target.value)}
+            placeholder="Write a comment..."
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            rows="4"
+            required
+          />
+          <button
+            type="submit"
+            className="mt-3 px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+          >
+            Submit Comment
+          </button>
+        </form>
+
+        {/* Display Comments */}
+        <div className="space-y-4">
+          {comments.map((comment) => (
+            <div key={comment._id} className="border-b border-gray-200 pb-4">
+              <p className="text-gray-700">{comment.content}</p>
+              <p className="text-sm text-gray-500 mt-2">
+                Posted by {comment.author} on {new Date(comment.createdAt).toLocaleDateString()}
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

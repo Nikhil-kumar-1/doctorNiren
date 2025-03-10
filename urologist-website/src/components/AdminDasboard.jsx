@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { backendUrl } from "../config/config";
+
 const AdminDashboard = () => {
   const [appointments, setAppointments] = useState([]);
   const [blogs, setBlogs] = useState([]);
   const [activeTab, setActiveTab] = useState("appointments"); // Track active tab
   const [newBlog, setNewBlog] = useState({ title: "", content: "", image: "" }); // For creating a new blog
   const [editBlog, setEditBlog] = useState(null); // For editing a blog
+  const [comments, setComments] = useState({}); // Store comments as { blogId: [comments] }
   const navigate = useNavigate();
 
   // Fetch all appointments
@@ -24,12 +26,28 @@ const AdminDashboard = () => {
     fetchAppointments();
   }, []);
 
+  // Fetch comments for a specific blog
+  const fetchComments = async (blogId) => {
+    try {
+      const response = await fetch(`${backendUrl}/api/blogs/${blogId}/comments`);
+      const data = await response.json();
+      setComments((prev) => ({ ...prev, [blogId]: data })); // Store comments by blogId
+    } catch (error) {
+      console.error("Error fetching comments:", error);
+    }
+  };
+
   // Fetch all blogs
   const fetchBlogs = async () => {
     try {
       const response = await fetch(`${backendUrl}/api/blogs`);
       const data = await response.json();
       setBlogs(data);
+
+      // Fetch comments for each blog
+      data.forEach((blog) => {
+        fetchComments(blog._id);
+      });
     } catch (error) {
       console.error("Error fetching blogs:", error);
     }
@@ -87,16 +105,13 @@ const AdminDashboard = () => {
   const handleEditBlog = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(
-        `${backendUrl}/api/blogs/${editBlog._id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(editBlog),
-        }
-      );
+      const response = await fetch(`${backendUrl}/api/blogs/${editBlog._id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(editBlog),
+      });
 
       if (response.ok) {
         alert("Blog updated successfully!");
@@ -107,6 +122,27 @@ const AdminDashboard = () => {
       }
     } catch (error) {
       console.error("Error updating blog:", error);
+    }
+  };
+
+  // Handle delete comment
+  const handleDeleteComment = async (blogId, commentId) => {
+    try {
+      const response = await fetch(
+        `${backendUrl}/api/blogs/${blogId}/comments/${commentId}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if (response.ok) {
+        alert("Comment deleted successfully!");
+        fetchComments(blogId); // Refresh comments for the blog
+      } else {
+        alert("Failed to delete comment");
+      }
+    } catch (error) {
+      console.error("Error deleting comment:", error);
     }
   };
 
@@ -271,12 +307,37 @@ const AdminDashboard = () => {
                       {blog.content.split(" ").slice(0, 50).join(" ")}
                       {blog.content.split(" ").length > 50 ? "..." : ""}
                     </p>
-
                     <img
                       src={blog.image}
                       alt={blog.title}
                       className="w-full h-20 object-cover mt-2"
                     />
+
+                    {/* Display Comments */}
+                    <div className="mt-4">
+                      <h4 className="font-semibold mb-2">Comments</h4>
+                      {comments[blog._id]?.length > 0 ? (
+                        comments[blog._id].map((comment) => (
+                          <div key={comment._id} className="border-t pt-2 mt-2">
+                            <p className="text-sm text-gray-700">{comment.content}</p>
+                            <p className="text-xs text-gray-500">
+                              Posted by {comment.author} on{" "}
+                              {new Date(comment.createdAt).toLocaleDateString()}
+                            </p>
+                            <button
+                              onClick={() => handleDeleteComment(blog._id, comment._id)}
+                              className="text-red-600 hover:text-red-800 text-xs"
+                            >
+                              Delete Comment
+                            </button>
+                          </div>
+                        ))
+                      ) : (
+                        <p className="text-sm text-gray-500">No comments yet.</p>
+                      )}
+                    </div>
+
+                    {/* Edit and Delete Blog Buttons */}
                     <div className="mt-4 flex space-x-4">
                       <button
                         onClick={() => setEditBlog(blog)}
