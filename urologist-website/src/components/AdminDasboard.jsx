@@ -161,7 +161,7 @@ const AdminDashboard = () => {
       if (!response.ok) {
         throw new Error("Failed to delete contact details");
       }
-      setAppointments(appointments.filter((appointment) => appointment._id !== appointmentId)); // Remove deleted appointment from state
+      setAppointments(contacts.filter((contact) => contact._id !== contactId)); // Remove deleted appointment from state
     } catch (error) {
       console.error("Error deleting contact details:", error);
     }
@@ -366,7 +366,7 @@ const AdminDashboard = () => {
                       </td>
                       <td className="px-4 py-2 text-sm text-gray-900">
               <button
-                onClick={() => handleDelete(contact._id)}
+                onClick={() => handleContactDelete(contact._id)}
                 className="text-red-500 hover:text-red-700"
               >
                 Delete
