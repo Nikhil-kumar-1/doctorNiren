@@ -57,6 +57,38 @@ const BlogDetails = () => {
     }
   };
 
+  // Handle like
+  const handleLike = async () => {
+    try {
+      const response = await fetch(`${backendUrl}/api/blogs/${id}/like`, {
+        method: "POST",
+      });
+      if (!response.ok) {
+        throw new Error("Failed to like blog");
+      }
+      const data = await response.json();
+      setBlog(data); // Update the blog with new like count
+    } catch (error) {
+      console.error("Error liking blog:", error);
+    }
+  };
+
+  // Handle dislike
+  const handleDislike = async () => {
+    try {
+      const response = await fetch(`${backendUrl}/api/blogs/${id}/dislike`, {
+        method: "POST",
+      });
+      if (!response.ok) {
+        throw new Error("Failed to dislike blog");
+      }
+      const data = await response.json();
+      setBlog(data); // Update the blog with new dislike count
+    } catch (error) {
+      console.error("Error disliking blog:", error);
+    }
+  };
+
   if (!blog) {
     return <div className="text-center py-8">Loading...</div>;
   }
@@ -78,6 +110,24 @@ const BlogDetails = () => {
         <h1 className="text-3xl lg:text-4xl font-bold text-gray-800 mb-6">
           {blog.title}
         </h1>
+
+        {/* Like/Dislike Buttons */}
+        <div className="flex space-x-4 mb-6">
+          <button
+            onClick={handleLike}
+            className="flex items-center space-x-2 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+          >
+            <span>Like</span>
+            <span>{blog.likes}</span>
+          </button>
+          <button
+            onClick={handleDislike}
+            className="flex items-center space-x-2 bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
+          >
+            <span>Dislike</span>
+            <span>{blog.dislikes}</span>
+          </button>
+        </div>
 
         {/* Blog Content */}
         <div

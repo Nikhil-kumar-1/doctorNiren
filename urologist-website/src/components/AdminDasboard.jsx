@@ -13,7 +13,14 @@ import {
 } from "chart.js";
 
 // Register Chart.js components
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 const AdminDashboard = () => {
   const [appointments, setAppointments] = useState([]);
@@ -44,7 +51,9 @@ const AdminDashboard = () => {
   // Fetch comments for a specific blog
   const fetchComments = async (blogId) => {
     try {
-      const response = await fetch(`${backendUrl}/api/blogs/${blogId}/comments`);
+      const response = await fetch(
+        `${backendUrl}/api/blogs/${blogId}/comments`
+      );
       const data = await response.json();
       setComments((prev) => ({ ...prev, [blogId]: data }));
     } catch (error) {
@@ -53,21 +62,21 @@ const AdminDashboard = () => {
   };
 
   // Fetch Contact Messages
-useEffect(() => {
-  const fetchContacts = async () => {
-    try {
-      const response = await fetch(`${backendUrl}/api/admin/contacts`);
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
+  useEffect(() => {
+    const fetchContacts = async () => {
+      try {
+        const response = await fetch(`${backendUrl}/api/admin/contacts`);
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+        setContacts(data);
+      } catch (error) {
+        console.error("Error fetching contact messages:", error);
       }
-      const data = await response.json();
-      setContacts(data);
-    } catch (error) {
-      console.error("Error fetching contact messages:", error);
-    }
-  };
-  fetchContacts();
-}, []);
+    };
+    fetchContacts();
+  }, []);
 
   // Fetch all blogs
   const fetchBlogs = async () => {
@@ -262,16 +271,15 @@ useEffect(() => {
               </button>
             </li>
             <li>
-  <button
-    onClick={() => setActiveTab("contact")}
-    className={`block py-2 px-4 w-full text-left hover:bg-blue-700 rounded ${
-      activeTab === "contact" ? "bg-blue-700" : ""
-    }`}
-  >
-    Contact Messages
-  </button>
-</li>
-
+              <button
+                onClick={() => setActiveTab("contact")}
+                className={`block py-2 px-4 w-full text-left hover:bg-blue-700 rounded ${
+                  activeTab === "contact" ? "bg-blue-700" : ""
+                }`}
+              >
+                Contact Messages
+              </button>
+            </li>
 
             <li>
               <button
@@ -287,50 +295,49 @@ useEffect(() => {
 
       {/* Main Content */}
       <div className="flex-1 p-4 lg:p-8">
-      {
-  activeTab === "contact" ? (
-    <>
-      <h1 className="text-3xl font-bold mb-8">Contact Messages</h1>
-      <div className="bg-white rounded-lg shadow overflow-x-auto">
-        <table className="min-w-full">
-          <thead className="bg-gray-200">
-            <tr>
-              <th className="px-4 py-2 text-left text-sm font-semibold text-gray-700">
-                Name
-              </th>
-              <th className="px-4 py-2 text-left text-sm font-semibold text-gray-700">
-                Email
-              </th>
-              <th className="px-4 py-2 text-left text-sm font-semibold text-gray-700">
-                Phone
-              </th>
-              <th className="px-4 py-2 text-left text-sm font-semibold text-gray-700">
-                Message
-              </th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-gray-200">
-            {contacts.map((contact) => (
-              <tr key={contact._id}>
-                <td className="px-4 py-2 text-sm text-gray-900">
-                  {contact.name}
-                </td>
-                <td className="px-4 py-2 text-sm text-gray-900">
-                  {contact.email}
-                </td>
-                <td className="px-4 py-2 text-sm text-gray-900">
-                  {contact.phone}
-                </td>
-                <td className="px-4 py-2 text-sm text-gray-900">
-                  {contact.message}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </>
-  ):activeTab === "appointments" ? (
+        {activeTab === "contact" ? (
+          <>
+            <h1 className="text-3xl font-bold mb-8">Contact Messages</h1>
+            <div className="bg-white rounded-lg shadow overflow-x-auto">
+              <table className="min-w-full">
+                <thead className="bg-gray-200">
+                  <tr>
+                    <th className="px-4 py-2 text-left text-sm font-semibold text-gray-700">
+                      Name
+                    </th>
+                    <th className="px-4 py-2 text-left text-sm font-semibold text-gray-700">
+                      Email
+                    </th>
+                    <th className="px-4 py-2 text-left text-sm font-semibold text-gray-700">
+                      Phone
+                    </th>
+                    <th className="px-4 py-2 text-left text-sm font-semibold text-gray-700">
+                      Message
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-200">
+                  {contacts.map((contact) => (
+                    <tr key={contact._id}>
+                      <td className="px-4 py-2 text-sm text-gray-900">
+                        {contact.name}
+                      </td>
+                      <td className="px-4 py-2 text-sm text-gray-900">
+                        {contact.email}
+                      </td>
+                      <td className="px-4 py-2 text-sm text-gray-900">
+                        {contact.phone}
+                      </td>
+                      <td className="px-4 py-2 text-sm text-gray-900">
+                        {contact.message}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </>
+        ) : activeTab === "appointments" ? (
           <>
             <h1 className="text-3xl font-bold mb-8">Appointments</h1>
             <div className="bg-white rounded-lg shadow overflow-x-auto">
@@ -433,8 +440,6 @@ useEffect(() => {
               </form>
             </div>
 
-            
-
             {/* Blog List */}
             <div className="bg-white rounded-lg shadow p-4 lg:p-6">
               <h2 className="text-xl font-bold mb-4">Blogs</h2>
@@ -451,6 +456,12 @@ useEffect(() => {
                       alt={blog.title}
                       className="w-full h-20 object-cover mt-2"
                     />
+{/* //Like dislike comment */}
+                    <div className="mt-4">
+                      <p className="text-sm text-gray-700">
+                        Likes: {blog.likes} | Dislikes: {blog.dislikes}
+                      </p>
+                    </div>
 
                     {/* Display Comments */}
                     <div className="mt-4">
@@ -458,13 +469,17 @@ useEffect(() => {
                       {comments[blog._id]?.length > 0 ? (
                         comments[blog._id].map((comment) => (
                           <div key={comment._id} className="border-t pt-2 mt-2">
-                            <p className="text-sm text-gray-700">{comment.content}</p>
+                            <p className="text-sm text-gray-700">
+                              {comment.content}
+                            </p>
                             <p className="text-xs text-gray-500">
                               Posted by {comment.author} on{" "}
                               {new Date(comment.createdAt).toLocaleDateString()}
                             </p>
                             <button
-                              onClick={() => handleDeleteComment(blog._id, comment._id)}
+                              onClick={() =>
+                                handleDeleteComment(blog._id, comment._id)
+                              }
                               className="text-red-600 hover:text-red-800 text-xs"
                             >
                               Delete Comment
@@ -472,7 +487,9 @@ useEffect(() => {
                           </div>
                         ))
                       ) : (
-                        <p className="text-sm text-gray-500">No comments yet.</p>
+                        <p className="text-sm text-gray-500">
+                          No comments yet.
+                        </p>
                       )}
                     </div>
 
