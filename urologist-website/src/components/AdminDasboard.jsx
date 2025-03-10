@@ -137,6 +137,22 @@ const AdminDashboard = () => {
     }
   };
 
+
+  // Handle appointment deletion
+  const handleDelete = async (appointmentId) => {
+    try {
+      const response = await fetch(`/api/appointments/${appointmentId}`, {
+        method: "DELETE",
+      });
+      if (!response.ok) {
+        throw new Error("Failed to delete appointment");
+      }
+      setAppointments(appointments.filter((appointment) => appointment._id !== appointmentId)); // Remove deleted appointment from state
+    } catch (error) {
+      console.error("Error deleting appointment:", error);
+    }
+  };
+
   // Handle delete blog
   const handleDeleteBlog = async (id) => {
     try {
