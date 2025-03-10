@@ -93,6 +93,15 @@ export default function ContactUs() {
           <p><strong>📍 Address:</strong> New Delhi - 110068</p>
           <p><strong>📞 Phone:</strong> +91 9811144680</p>
           <p><strong>✉️ Email:</strong> example@gmail.com</p>
+            {/* Google Map Embed */}
+            <div className="mt-4">
+            <iframe
+              className="w-full h-40 md:h-50 rounded-lg"
+              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7011.172269501278!2d77.216523!3d28.522097000000002!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce1e6761396fd%3A0xa275eb89e1e57ddb!2sDr.%20Niren%20Rao%20-%20Best%20Urologist%20in%20Delhi%20%7C%20Kidney%20Stone%2C%20Bladder%20%26%20Prostate%20Cancer%20Treatment%2C%20Urethroplasty%20Surgery%20In%20Delhi!5e0!3m2!1sen!2sus!4v1741255117187!5m2!1sen!2sus"
+              allowFullScreen=""
+              loading="lazy"
+            ></iframe>
+          </div>
         </div>
       </div>
     </div>
