@@ -114,7 +114,7 @@ export default function Footer() {
       {/* Admin Panel Link with Icon */}
       <Link
         to="/admin"
-        className="flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-gray-100 transition"
+        className="flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-gray-100 transition width:50"
       >
         <UserCog size={20} className="text-gray-700" /> {/* Admin icon */}
         

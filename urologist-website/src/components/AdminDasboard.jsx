@@ -381,7 +381,7 @@ const AdminDashboard = () => {
         ) : activeTab === "appointments" ? (
           <>
             <h1 className="text-3xl font-bold mb-8">Appointments</h1>
-            <div className="bg-white rounded-lg shadow overflow-x-auto">
+            <div className="bg-white rounded-lg shadow ">
               <table className="min-w-full">
                 <thead className="bg-gray-200">
                   <tr>
