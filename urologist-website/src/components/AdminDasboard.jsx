@@ -161,7 +161,7 @@ const AdminDashboard = () => {
       if (!response.ok) {
         throw new Error("Failed to delete contact details");
       }
-      setAppointments(contacts.filter((contact) => contact._id !== contactId)); // Remove deleted appointment from state
+      setContacts(contacts.filter((contact) => contact._id !== contactId)); // Remove deleted appointment from state
     } catch (error) {
       console.error("Error deleting contact details:", error);
     }
