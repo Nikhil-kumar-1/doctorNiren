@@ -152,6 +152,20 @@ const AdminDashboard = () => {
       console.error("Error deleting appointment:", error);
     }
   };
+  // Handle appointment deletion
+  const handleContactDelete = async (contactId) => {
+    try {
+      const response = await fetch(`${backendUrl}/api/contact/${contactId}`, {
+        method: "DELETE",
+      });
+      if (!response.ok) {
+        throw new Error("Failed to delete contact details");
+      }
+      setAppointments(appointments.filter((appointment) => appointment._id !== appointmentId)); // Remove deleted appointment from state
+    } catch (error) {
+      console.error("Error deleting contact details:", error);
+    }
+  };
 
   // Handle delete blog
   const handleDeleteBlog = async (id) => {
@@ -330,6 +344,9 @@ const AdminDashboard = () => {
                     <th className="px-4 py-2 text-left text-sm font-semibold text-gray-700">
                       Message
                     </th>
+                    <th className="px-4 py-2 text-left text-sm font-semibold text-gray-700">
+                      Delete
+                    </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
@@ -347,6 +364,14 @@ const AdminDashboard = () => {
                       <td className="px-4 py-2 text-sm text-gray-900">
                         {contact.message}
                       </td>
+                      <td className="px-4 py-2 text-sm text-gray-900">
+              <button
+                onClick={() => handleDelete(contact._id)}
+                className="text-red-500 hover:text-red-700"
+              >
+                Delete
+              </button>
+            </td>
                     </tr>
                   ))}
                 </tbody>

@@ -26,4 +26,24 @@ router.get("/admin/contacts", async (req, res) => {
   }
 });
 
+// Route to delete an appointment by ID
+router.delete("/contact/:contactId", async (req, res) => {
+  try {
+    const { contactId } = req.params; // Get appointmentId from URL params
+
+    // Find and delete the appointment by its ID
+    const deletedContact = await Appointment.findByIdAndDelete(contactId);
+
+    if (!deletedContact) {
+      return res.status(404).json({ message: "Contact not found" });
+    }
+
+    res.status(200).json({ message: "Contact Details deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting contact details:", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+
+
 module.exports=router;
