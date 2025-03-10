@@ -379,6 +379,15 @@ const AdminDashboard = () => {
                       <td className="px-4 py-2 text-sm text-gray-900">
                         {appointment.message}
                       </td>
+
+                      <td className="px-4 py-2 text-sm text-gray-900">
+              <button
+                onClick={() => handleDelete(appointment._id)}
+                className="text-red-500 hover:text-red-700"
+              >
+                Delete
+              </button>
+            </td>
                     </tr>
                   ))}
                 </tbody>
