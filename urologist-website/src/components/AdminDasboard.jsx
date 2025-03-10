@@ -1,14 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { backendUrl } from "../config/config";
+import { Bar } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+
+// Register Chart.js components
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const AdminDashboard = () => {
   const [appointments, setAppointments] = useState([]);
   const [blogs, setBlogs] = useState([]);
-  const [activeTab, setActiveTab] = useState("appointments"); // Track active tab
-  const [newBlog, setNewBlog] = useState({ title: "", content: "", image: "" }); // For creating a new blog
-  const [editBlog, setEditBlog] = useState(null); // For editing a blog
-  const [comments, setComments] = useState({}); // Store comments as { blogId: [comments] }
+  const [activeTab, setActiveTab] = useState("appointments");
+  const [newBlog, setNewBlog] = useState({ title: "", content: "", image: "" });
+  const [editBlog, setEditBlog] = useState(null);
+  const [comments, setComments] = useState({});
+  const [dailyVisits, setDailyVisits] = useState([]);
   const navigate = useNavigate();
 
   // Fetch all appointments
@@ -31,7 +45,7 @@ const AdminDashboard = () => {
     try {
       const response = await fetch(`${backendUrl}/api/blogs/${blogId}/comments`);
       const data = await response.json();
-      setComments((prev) => ({ ...prev, [blogId]: data })); // Store comments by blogId
+      setComments((prev) => ({ ...prev, [blogId]: data }));
     } catch (error) {
       console.error("Error fetching comments:", error);
     }
@@ -53,9 +67,22 @@ const AdminDashboard = () => {
     }
   };
 
+  // Fetch daily visits
+  const fetchDailyVisits = async () => {
+    try {
+      const response = await fetch(`${backendUrl}/api/daily-visits`);
+      const data = await response.json();
+      setDailyVisits(data);
+    } catch (error) {
+      console.error("Error fetching daily visits:", error);
+    }
+  };
+
   useEffect(() => {
     if (activeTab === "blogs") {
       fetchBlogs();
+    } else if (activeTab === "visits") {
+      fetchDailyVisits();
     }
   }, [activeTab]);
 
@@ -152,6 +179,33 @@ const AdminDashboard = () => {
     navigate("/login"); // Redirect to the login page
   };
 
+  // Prepare data for the bar chart
+  const chartData = {
+    labels: dailyVisits.map((visit) => visit.date),
+    datasets: [
+      {
+        label: "Daily Visits",
+        data: dailyVisits.map((visit) => visit.count),
+        backgroundColor: "rgba(75, 192, 192, 0.6)",
+        borderColor: "rgba(75, 192, 192, 1)",
+        borderWidth: 1,
+      },
+    ],
+  };
+
+  const chartOptions = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top",
+      },
+      title: {
+        display: true,
+        text: "Daily Visits",
+      },
+    },
+  };
+
   return (
     <div className="flex flex-col lg:flex-row min-h-screen bg-gray-100">
       {/* Left Sidebar */}
@@ -177,6 +231,16 @@ const AdminDashboard = () => {
                 }`}
               >
                 Manage Blogs
+              </button>
+            </li>
+            <li>
+              <button
+                onClick={() => setActiveTab("visits")}
+                className={`block py-2 px-4 w-full text-left hover:bg-blue-700 rounded ${
+                  activeTab === "visits" ? "bg-blue-700" : ""
+                }`}
+              >
+                Daily Visits
               </button>
             </li>
             <li>
@@ -241,7 +305,7 @@ const AdminDashboard = () => {
               </table>
             </div>
           </>
-        ) : (
+        ) : activeTab === "blogs" ? (
           <>
             <h1 className="text-3xl font-bold mb-8">Manage Blogs</h1>
             {/* Create/Edit Blog Form */}
@@ -355,6 +419,13 @@ const AdminDashboard = () => {
                   </div>
                 ))}
               </div>
+            </div>
+          </>
+        ) : (
+          <>
+            <h1 className="text-3xl font-bold mb-8">Daily Visits</h1>
+            <div className="bg-white rounded-lg shadow p-4 lg:p-6">
+              <Bar data={chartData} options={chartOptions} />
             </div>
           </>
         )}
