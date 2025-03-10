@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import { Link } from "react-router-dom";
 const images = [
   "https://www.drnirenrao.com/images/gallery/dr-gallery-img1.jpg",
   "https://www.drnirenrao.com/images/gallery/dr-gallery-img2.jpg",
