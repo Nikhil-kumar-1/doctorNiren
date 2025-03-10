@@ -8,6 +8,7 @@ import {
   FaClock,
 } from "react-icons/fa";
 import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import { UserCog } from "lucide-react"; // Importing admin icon
 
 export default function Footer() {
   // List of services (matching the routes in App.jsx)
@@ -110,15 +111,15 @@ export default function Footer() {
         </div>
       </div>
       <div>
-        {/* Admin Panel Link with Icon */}
-        <Link
-          to="/admin"
-          className="flex items-center gap-2 px-4 py-2 rounded-lg"
-        >
-        <span>Admin</span>
-        </Link>
-      </div>
-
+      {/* Admin Panel Link with Icon */}
+      <Link
+        to="/admin"
+        className="flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-gray-100 transition"
+      >
+        <UserCog size={20} className="text-gray-700" /> {/* Admin icon */}
+        
+      </Link>
+    </div>
       {/* Bottom Navigation Links */}
       <div className="border-t border-gray-700  mt-8  pt-4 text-sm text-gray-300 text-center flex flex-wrap justify-center space-x-2">
         <Link to="/" className="hover:text-blue-400">
