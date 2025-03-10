@@ -134,7 +134,7 @@ export default function Footer() {
         <Link to="/circumcision" className="hover:text-blue-400">
          Circumcision,
         </Link>
-        <Link to="/services/erectileDisfunction" className="hover:text-blue-400">
+        <Link to="/services/erectileDysfunction" className="hover:text-blue-400">
           ErectileDysfunction,
         </Link>
         <Link to="/aboutClinic" className="hover:text-blue-400">
