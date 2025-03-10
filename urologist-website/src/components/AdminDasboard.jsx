@@ -23,6 +23,7 @@ const AdminDashboard = () => {
   const [editBlog, setEditBlog] = useState(null);
   const [comments, setComments] = useState({});
   const [dailyVisits, setDailyVisits] = useState([]);
+  const [contacts, setContacts] = useState([]);
   const navigate = useNavigate();
 
   // Fetch all appointments
@@ -50,6 +51,23 @@ const AdminDashboard = () => {
       console.error("Error fetching comments:", error);
     }
   };
+
+  // Fetch Contact Messages
+useEffect(() => {
+  const fetchContacts = async () => {
+    try {
+      const response = await fetch(`${backendUrl}/api/contact`);
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      const data = await response.json();
+      setContacts(data);
+    } catch (error) {
+      console.error("Error fetching contact messages:", error);
+    }
+  };
+  fetchContacts();
+}, []);
 
   // Fetch all blogs
   const fetchBlogs = async () => {
@@ -244,6 +262,18 @@ const AdminDashboard = () => {
               </button>
             </li>
             <li>
+  <button
+    onClick={() => setActiveTab("contact")}
+    className={`block py-2 px-4 w-full text-left hover:bg-blue-700 rounded ${
+      activeTab === "contact" ? "bg-blue-700" : ""
+    }`}
+  >
+    Contact Messages
+  </button>
+</li>
+
+
+            <li>
               <button
                 onClick={handleLogout}
                 className="block py-2 px-4 w-full text-left hover:bg-blue-700 rounded"
@@ -257,7 +287,50 @@ const AdminDashboard = () => {
 
       {/* Main Content */}
       <div className="flex-1 p-4 lg:p-8">
-        {activeTab === "appointments" ? (
+      {
+  activeTab === "contact" ? (
+    <>
+      <h1 className="text-3xl font-bold mb-8">Contact Messages</h1>
+      <div className="bg-white rounded-lg shadow overflow-x-auto">
+        <table className="min-w-full">
+          <thead className="bg-gray-200">
+            <tr>
+              <th className="px-4 py-2 text-left text-sm font-semibold text-gray-700">
+                Name
+              </th>
+              <th className="px-4 py-2 text-left text-sm font-semibold text-gray-700">
+                Email
+              </th>
+              <th className="px-4 py-2 text-left text-sm font-semibold text-gray-700">
+                Phone
+              </th>
+              <th className="px-4 py-2 text-left text-sm font-semibold text-gray-700">
+                Message
+              </th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-gray-200">
+            {contacts.map((contact) => (
+              <tr key={contact._id}>
+                <td className="px-4 py-2 text-sm text-gray-900">
+                  {contact.name}
+                </td>
+                <td className="px-4 py-2 text-sm text-gray-900">
+                  {contact.email}
+                </td>
+                <td className="px-4 py-2 text-sm text-gray-900">
+                  {contact.phone}
+                </td>
+                <td className="px-4 py-2 text-sm text-gray-900">
+                  {contact.message}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
+  ):activeTab === "appointments" ? (
           <>
             <h1 className="text-3xl font-bold mb-8">Appointments</h1>
             <div className="bg-white rounded-lg shadow overflow-x-auto">
@@ -359,6 +432,8 @@ const AdminDashboard = () => {
                 </div>
               </form>
             </div>
+
+            
 
             {/* Blog List */}
             <div className="bg-white rounded-lg shadow p-4 lg:p-6">
