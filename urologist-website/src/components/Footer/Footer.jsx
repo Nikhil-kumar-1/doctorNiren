@@ -104,10 +104,21 @@ export default function Footer() {
 
         {/* Top Reviews Section */}
         <div>
-          <h3 className="text-lg font-bold mb-3">TOP REVIEWS</h3>
-          <button className=" cursor-pointer   border border-blue-400 text-blue-400 py-2 px-4 rounded hover:bg-blue-500 hover:text-white transition">
-            VIEW ALL →
-          </button>
+          <h3 className="text-lg font-bold mb-3">Book Appointment</h3>
+          <Link to={"/appointment"} className="cursor-pointer border border-blue-400 text-blue-400 py-2 px-4 rounded hover:bg-blue-500 hover:text-white transition">
+           Book Appointment →
+          </Link><br></br><br></br>
+
+          <h3 className="text-lg font-bold mb-3">Login</h3>
+          <Link to={"/login"} className="cursor-pointer border border-blue-400 text-blue-400 py-2 px-4 rounded hover:bg-blue-500 hover:text-white transition">
+           Login →
+          </Link>
+          <br></br><br></br>
+
+          <h3 className="text-lg font-bold mb-3">Services</h3>
+          <Link to={"/services"} className="cursor-pointer border border-blue-400 text-blue-400 py-2 px-4 rounded hover:bg-blue-500 hover:text-white transition">
+           All Services →
+          </Link>
         </div>
       </div>
       <div className="width:50px">
