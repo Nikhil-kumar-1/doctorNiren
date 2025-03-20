@@ -15,7 +15,7 @@ const app = express();
 
 // Middleware for CORS
 app.use(cors({
-  origin: ["https://doctor-niren.vercel.app", "http://localhost:5173"],
+  origin: ["https://doctor-kunjan.vercel.app", "http://localhost:5173"],
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH"]
 }));
