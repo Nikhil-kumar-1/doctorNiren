@@ -28,15 +28,8 @@ export default function Footer() {
 
   return (
     <footer className="bg-gray-800 text-white py-10 px-5 md:px-20 relative">
-      {/* Chat Icon (Fixed on the right side) */}
-      {/* <div className="fixed bottom-8 right-8 z-50">
-      <button
-      className="fixed bottom-6 right-6 bg-blue-500 text-white p-4 rounded-full shadow-lg hover:bg-blue-600 transition"
-      onClick={() => navigate("/chat")} // Navigate to Chat page
-    >
-      <FaCommentDots size={24} />
-    </button>
-      </div> */}
+     
+    
 
       {/* Footer Content */}
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
