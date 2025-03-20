@@ -378,7 +378,11 @@ const AdminDashboard = () => {
               </table>
             </div>
           </>
+<<<<<<< HEAD
         ):activeTab === "appointments" ? (
+=======
+        ) :activeTab === "appointments" ? (
+>>>>>>> 1e4b3fcdaf5e5306d1c3e194fb29b74208f28726
           <>
             <h1 className="text-3xl font-bold mb-8">Appointments</h1>
             <div className="bg-white rounded-lg shadow overflow-x-auto">
@@ -437,7 +441,11 @@ const AdminDashboard = () => {
               </table>
             </div>
           </>
+<<<<<<< HEAD
         ): activeTab === "blogs" ? (
+=======
+        ):activeTab === "blogs" ? (
+>>>>>>> 1e4b3fcdaf5e5306d1c3e194fb29b74208f28726
           <>
             <h1 className="text-3xl font-bold mb-8">Manage Blogs</h1>
             {/* Create/Edit Blog Form */}

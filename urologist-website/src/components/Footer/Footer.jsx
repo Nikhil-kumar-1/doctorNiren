@@ -7,11 +7,16 @@ import {
   FaPhoneAlt,
   FaClock,
 } from "react-icons/fa";
+<<<<<<< HEAD
 import { FaCommentDots } from "react-icons/fa"; // Chat icon
 import { Link } from "react-router-dom";
 import { UserCog } from "lucide-react";
 // import Chat from "../Chat"; // Import the Chat component
 // import { useNavigate } from "react-router-dom";
+=======
+import { Link } from "react-router-dom"; // Import Link from react-router-dom
+
+>>>>>>> 1e4b3fcdaf5e5306d1c3e194fb29b74208f28726
 
 export default function Footer() {
   // const navigate = useNavigate();
@@ -118,6 +123,7 @@ export default function Footer() {
         {/* Top Reviews Section */}
         <div>
           <h3 className="text-lg font-bold mb-3">Book Appointment</h3>
+<<<<<<< HEAD
           <Link
             to={"/appointment"}
             className="cursor-pointer border border-blue-400 text-blue-400 py-2 px-4 rounded hover:bg-blue-500 hover:text-white transition"
@@ -149,6 +155,25 @@ export default function Footer() {
 
       {/* Admin Panel Link with Icon */}
 
+=======
+          <Link to={"/appointment"} className="cursor-pointer border border-blue-400 text-blue-400 py-2 px-4 rounded hover:bg-blue-500 hover:text-white transition">
+           Book Appointment →
+          </Link><br></br><br></br>
+
+          <h3 className="text-lg font-bold mb-3">Login</h3>
+          <Link to={"/login"} className="cursor-pointer border border-blue-400 text-blue-400 py-2 px-4 rounded hover:bg-blue-500 hover:text-white transition">
+           Login →
+          </Link>
+          <br></br><br></br>
+
+          <h3 className="text-lg font-bold mb-3">Services</h3>
+          <Link to={"/services"} className="cursor-pointer border border-blue-400 text-blue-400 py-2 px-4 rounded hover:bg-blue-500 hover:text-white transition">
+           All Services →
+          </Link>
+        </div>
+      </div>
+      
+>>>>>>> 1e4b3fcdaf5e5306d1c3e194fb29b74208f28726
       {/* Bottom Navigation Links */}
       <div className="border-t border-gray-700 mt-8 pt-4 text-sm text-gray-300 text-center flex flex-wrap justify-center space-x-2">
         <Link to="/" className="hover:text-blue-400">
