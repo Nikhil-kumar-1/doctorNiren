@@ -65,7 +65,7 @@ const PrivacyPolicy = () => {
         <h2 className="text-2xl font-semibold my-6">Contact Us</h2>
         <p className="text-gray-600 mb-6">
           If you have any questions about our privacy policy or the information available on our website, please write into us at{" "}
-          <a href="mailto:info@drnirenrao.com" className="text-blue-500 hover:underline">
+          <a href="mailto:info@drkunjankumar.com" className="text-blue-500 hover:underline">
             info@drnirenrao.com
           </a>
           .

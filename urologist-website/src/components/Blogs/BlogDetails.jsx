@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { backendUrl } from "../../config/config";
+import { Helmet } from "react-helmet-async";
 
 const BlogDetails = () => {
   const { id } = useParams(); // Get the blog ID from the URL
@@ -95,6 +96,43 @@ const BlogDetails = () => {
 
   return (
     <div className="bg-gray-100 min-h-screen">
+      {/* React Helmet for SEO */}
+      <Helmet>
+  <title>{blog.title} - My Blog</title>
+  <meta name="description" content={blog.content ? blog.content.substring(0, 160) : "Read this amazing blog on our platform."} />
+  <meta property="og:title" content={blog.title} />
+  <meta property="og:description" content={blog.content ? blog.content.substring(0, 160) : "Check out this blog!"} />
+  <meta property="og:image" content={blog.image || "/default-thumbnail.jpg"} />
+  <meta property="og:type" content="article" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={blog.title} />
+  <meta name="twitter:description" content={blog.content ? blog.content.substring(0, 160) : "Engaging blog content"} />
+  <meta name="twitter:image" content={blog.image || "/default-thumbnail.jpg"} />
+
+  {/* Schema Markup for SEO */}
+  <script type="application/ld+json">
+    {JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": blog.title,
+      "description": blog.content ? blog.content.substring(0, 160) : "Read this blog on our platform.",
+      "image": blog.image || "/default-thumbnail.jpg",
+      "author": {
+        "@type": "Person",
+        "name": blog.author || "Unknown Author"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "My Blog",
+        "logo": { "@type": "ImageObject", "url": "/logo.png" }
+      },
+      "datePublished": blog.createdAt,
+      "dateModified": blog.updatedAt || blog.createdAt
+    })}
+  </script>
+</Helmet>
+
+
       {/* Banner Image */}
       <div className="relative h-64 lg:h-96 overflow-hidden">
         <img

@@ -378,67 +378,66 @@ const AdminDashboard = () => {
               </table>
             </div>
           </>
-        ) : activeTab === "appointments" ? (
+        ):activeTab === "appointments" ? (
           <>
             <h1 className="text-3xl font-bold mb-8">Appointments</h1>
-            <div className="bg-white rounded-lg shadow ">
+            <div className="bg-white rounded-lg shadow overflow-x-auto">
               <table className="min-w-full">
-                <thead className="bg-gray-200">
+                <thead className="bg-blue-500"> {/* Header Row Background Color */}
                   <tr>
-                    <th className="px-4 py-2 text-left text-sm font-semibold text-gray-700">
+                    <th className="px-4 py-2 text-left text-sm font-semibold text-white">
                       Name
                     </th>
-                    <th className="px-4 py-2 text-left text-sm font-semibold text-gray-700">
+                    <th className="px-4 py-2 text-left text-sm font-semibold text-white">
                       Email
                     </th>
-                    <th className="px-4 py-2 text-left text-sm font-semibold text-gray-700">
+                    <th className="px-4 py-2 text-left text-sm font-semibold text-white">
                       Phone
                     </th>
-                    <th className="px-4 py-2 text-left text-sm font-semibold text-gray-700">
+                    <th className="px-4 py-2 text-left text-sm font-semibold text-white">
                       Date
                     </th>
-                    <th className="px-4 py-2 text-left text-sm font-semibold text-gray-700">
+                    <th className="px-4 py-2 text-left text-sm font-semibold text-white">
                       Message
                     </th>
-                    <th className="px-4 py-2 text-left text-sm font-semibold text-gray-700">
+                    <th className="px-4 py-2 text-left text-sm font-semibold text-white">
                       Delete
                     </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
                   {appointments.map((appointment) => (
-                    <tr key={appointment._id}>
-                      <td className="px-4 py-2 text-sm text-gray-900">
+                    <tr key={appointment._id} className="hover:bg-gray-50"> {/* Hover Effect on Rows */}
+                      <td className="px-4 py-2 text-sm text-gray-900 bg-blue-50"> {/* Column Background Color */}
                         {appointment.name}
                       </td>
-                      <td className="px-4 py-2 text-sm text-gray-900">
+                      <td className="px-4 py-2 text-sm text-gray-900 bg-blue-50">
                         {appointment.email}
                       </td>
-                      <td className="px-4 py-2 text-sm text-gray-900">
+                      <td className="px-4 py-2 text-sm text-gray-900 bg-blue-50">
                         {appointment.phone}
                       </td>
-                      <td className="px-4 py-2 text-sm text-gray-900">
+                      <td className="px-4 py-2 text-sm text-gray-900 bg-blue-50">
                         {new Date(appointment.date).toLocaleDateString()}
                       </td>
-                      <td className="px-4 py-2 text-sm text-gray-900">
+                      <td className="px-4 py-2 text-sm text-gray-900 bg-blue-50">
                         {appointment.message}
                       </td>
-
-                      <td className="px-4 py-2 text-sm text-gray-900">
-              <button
-                onClick={() => handleDelete(appointment._id)}
-                className="text-red-500 hover:text-red-700"
-              >
-                Delete
-              </button>
-            </td>
+                      <td className="px-4 py-2 text-sm text-gray-900 bg-blue-50">
+                        <button
+                          onClick={() => handleDelete(appointment._id)}
+                          className="text-red-500 hover:text-red-700"
+                        >
+                          Delete
+                        </button>
+                      </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
           </>
-        ) : activeTab === "blogs" ? (
+        ): activeTab === "blogs" ? (
           <>
             <h1 className="text-3xl font-bold mb-8">Manage Blogs</h1>
             {/* Create/Edit Blog Form */}

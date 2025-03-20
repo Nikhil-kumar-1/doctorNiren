@@ -1,12 +1,15 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 export default function AboutClinic() {
   return (
     <div className="bg-gray-100">
       {/* Blue Banner Section */}
       <div className="bg-blue-700 text-white py-12 text-center">
-        <h1 className="text-4xl font-bold">Welcome to Dr. Niren Rao’s Urology Practice</h1>
+        <h1 className="text-4xl font-bold">
+          Welcome to Kunjan Kumar’s Urology Practice
+        </h1>
         <p className="mt-4 text-lg">
-          Providing world-class urological care with advanced technology and compassionate expertise.
+          Providing world-class urological care with advanced technology and
+          compassionate expertise.
         </p>
       </div>
 
@@ -17,12 +20,12 @@ export default function AboutClinic() {
           About Our Clinic
         </h2>
         <p className="mt-4 text-gray-700 text-lg text-left">
-          Dr. Niren’s Rao Urology Practice is based on the motive to provide
+          Dr. Kunjan’s Kumar Urology Practice is based on the motive to provide
           world-class treatments for all the urological problems including
           diseases that affects the genitourinary tract. Well-equipped clinic
           with modern technologies offers conventional treatments and robotic
-          techniques to treat prostate cancer and stones. Dr. Niren Rao is a
-          renowned Urologist located in Delhi with an experience of 18+ years
+          techniques to treat prostate cancer and stones. Dr. Kunjan Kumar is a
+          renowned Urologist located in Patna with an experience of 18+ years
           and offering avant-garde services for all the urology problems with
           his team of skilled and well-trained surgeons. The mission is to blend
           the research, surgical expertise and medical technology to ensure
@@ -90,7 +93,8 @@ export default function AboutClinic() {
 
         {/* Call to Action */}
         <div className="mt-10 text-center">
-          <Link to="/appointment"
+          <Link
+            to="/appointment"
             className="bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 transition"
           >
             Book an Appointment

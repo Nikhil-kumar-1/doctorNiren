@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { backendUrl } from "../../config/config";
+import { Helmet } from "react-helmet-async";
 
 const Blog = () => {
   const navigate = useNavigate();
@@ -33,6 +34,21 @@ const Blog = () => {
 
   return (
     <div className="bg-gray-100">
+      {/* SEO Optimization for Blog List Page */}
+      <Helmet>
+        <title>Blog - Kidney & Urology Care</title>
+        <meta
+          name="description"
+          content="Stay updated with the latest news, insights, and advancements in urology and kidney care."
+        />
+        <meta property="og:title" content="Blog - Kidney & Urology Care" />
+        <meta
+          property="og:description"
+          content="Explore our latest blogs on urology and kidney care."
+        />
+        <meta property="og:type" content="website" />
+      </Helmet>
+
       {/* Blue Banner Section */}
       <div className="bg-blue-700 text-white py-12 text-center">
         <h1 className="text-4xl font-bold">Blog</h1>

@@ -53,7 +53,7 @@ export default function Navbar() {
             📞 +91 8595432923
           </a>
           <a href="mailto:drnirenrao@gmail.com" className="hover:underline">
-            ✉️ drnirenrao@gmail.com
+            ✉️ drkunjankumar@gmail.com
           </a>
         </div>
       </div>
@@ -62,7 +62,8 @@ export default function Navbar() {
       <div className="flex justify-between items-center py-4 px-6">
         {/* Logo */}
         <div className="text-2xl font-bold text-blue-700">
-          <img src="https://www.drnirenrao.com/images/logo.png" alt="Logo" />
+        <img src="logo2.png" alt="Logo" className="w-70 h-15" />
+
         </div>
 
         {/* Desktop Menu */}

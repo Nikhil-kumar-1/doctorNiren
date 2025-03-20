@@ -43,7 +43,7 @@ const Video = () => {
               allowFullScreen
             ></iframe>
             <h3 className="text-xl font-semibold mt-4">PCNL Explained</h3>
-            <p className="text-gray-600 mt-2">All you need to know about PCNL | Dr. Niren Rao - Urologist.</p>
+            <p className="text-gray-600 mt-2">All you need to know about PCNL | Dr. Kunjan Kumar - Urologist.</p>
           </div>
 
           {/* Video 3 */}
@@ -57,7 +57,7 @@ const Video = () => {
               allowFullScreen
             ></iframe>
             <h3 className="text-xl font-semibold mt-4">Prostat Treatment</h3>
-            <p className="text-gray-600 mt-2">Are you suffering from Prostate Cancer? | Dr. Niren Rao - Urologist.</p>
+            <p className="text-gray-600 mt-2">Are you suffering from Prostate Cancer? | Dr. Kunjan Kumar - Urologist.</p>
           </div>
 
           {/* Video 4 */}

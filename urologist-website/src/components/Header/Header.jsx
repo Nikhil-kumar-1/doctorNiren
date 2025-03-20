@@ -10,7 +10,7 @@ const slides = [
       </>
     ),
     description:
-      "Dr. Niren Rao has been in practice since 18+ years and has performed more than 5000 surgeries.",
+      "Dr. Kunjan Kumar has been in practice since 18+ years and has performed more than 5000 surgeries.",
   },
   {
     image: "https://www.drnirenrao.com/images/banner_image3.jpg",

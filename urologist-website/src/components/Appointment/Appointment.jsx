@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { backendUrl } from "../../config/config";
+
 export default function AppointmentSection() {
   const testimonials = [
     {
       name: "Sparsh Jain",
-      review: "Dr. Niren attended me well on time for urine infection and abdominal pain. I am very much satisfied with the diagnosis.",
+      review: "Dr. Kunjan attended me well on time for urine infection and abdominal pain. I am very much satisfied with the diagnosis.",
       image: "https://randomuser.me/api/portraits/men/32.jpg",
     },
     {
@@ -14,7 +15,7 @@ export default function AppointmentSection() {
     },
     {
       name: "Rahul Sharma",
-      review: "Very well-equipped clinic and great diagnosis. I highly recommend Dr. Niren for any urology concerns.",
+      review: "Very well-equipped clinic and great diagnosis. I highly recommend Dr. Kunjan for any urology concerns.",
       image: "https://randomuser.me/api/portraits/men/50.jpg",
     },
   ];
@@ -72,14 +73,14 @@ export default function AppointmentSection() {
   };
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center bg-cover bg-center bg-fixed p-10">
+    <div className="relative min-h-screen flex items-center justify-center bg-cover bg-center bg-fixed p-4 sm:p-10">
       {/* Light Transparent Overlay */}
       <div className="absolute inset-0 bg-blue-500 bg-opacity-40 backdrop-blur-sm"></div>
 
       {/* Main Container */}
-      <div className="relative flex flex-col md:flex-row items-center w-full max-w-6xl">
+      <div className="relative flex flex-col md:flex-row items-center w-full max-w-6xl mx-auto">
         {/* Left - Form Section */}
-        <div className="bg-white bg-opacity-90 backdrop-blur-md text-gray-800 p-8 rounded-lg shadow-2xl w-full max-w-md md:w-1/2">
+        <div className="bg-white bg-opacity-90 backdrop-blur-md text-gray-800 p-6 sm:p-8 rounded-lg shadow-2xl w-full max-w-md md:w-1/2 mb-8 md:mb-0">
           <h2 className="text-2xl font-bold text-center mb-4 tracking-wide text-blue-700">BOOK AN APPOINTMENT</h2>
           <form className="space-y-4" onSubmit={handleSubmit}>
             <input
@@ -124,14 +125,17 @@ export default function AppointmentSection() {
               onChange={handleChange}
               className="w-full p-3 rounded border border-gray-300 focus:ring-2 focus:ring-blue-500"
             ></textarea>
-            <button type="submit" className="cursor-pointer w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition">
+            <button
+              type="submit"
+              className="cursor-pointer w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
+            >
               SUBMIT MESSAGE
             </button>
           </form>
         </div>
 
         {/* Right - Testimonials Section */}
-        <div className="md:w-1/2 text-white md:pl-10 mt-8 md:mt-0 ml-9">
+        <div className="md:w-1/2 text-white md:pl-10 w-full max-w-md md:max-w-none">
           <h3 className="text-xl font-bold mb-2 tracking-wide">WHAT OUR PATIENTS SAY</h3>
           <p className="text-sm mb-4 opacity-80">Read what our happy patients have to say about us.</p>
 
@@ -143,7 +147,11 @@ export default function AppointmentSection() {
 
             {/* User Info */}
             <div className="flex items-center mt-4">
-              <img src={testimonials[index].image} alt="User" className="w-12 h-12 rounded-full border-2 border-white mr-3" />
+              <img
+                src={testimonials[index].image}
+                alt="User"
+                className="w-12 h-12 rounded-full border-2 border-white mr-3"
+              />
               <p className="font-semibold text-lg">{testimonials[index].name}</p>
             </div>
           </div>

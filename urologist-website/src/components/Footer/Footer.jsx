@@ -7,11 +7,14 @@ import {
   FaPhoneAlt,
   FaClock,
 } from "react-icons/fa";
-import { Link } from "react-router-dom"; // Import Link from react-router-dom
-import { UserCog } from "lucide-react"; // Importing admin icon
+import { FaCommentDots } from "react-icons/fa"; // Chat icon
+import { Link } from "react-router-dom";
+import { UserCog } from "lucide-react";
+// import Chat from "../Chat"; // Import the Chat component
+// import { useNavigate } from "react-router-dom";
 
 export default function Footer() {
-  // List of services (matching the routes in App.jsx)
+  // const navigate = useNavigate();
   const services = [
     { name: "Kidney Stone Treatment", path: "/services/kidneyStone" },
     { name: "Kidney Cancer Treatment", path: "/services/kidney-cancer" },
@@ -21,20 +24,30 @@ export default function Footer() {
     { name: "Prostate Cancer Treatment", path: "/services/prostate-cancer" },
     { name: "Prostate Treatment", path: "/services/prostate-treatment" },
     { name: "Infertility", path: "/services/infertility" },
-    {name: "Erectile Dysfunction",path: "/services/erectileDysfunction", // Direct path without subItems
-    },
+    { name: "Erectile Dysfunction", path: "/services/erectileDysfunction" },
     { name: "Circumcision", path: "/services/circumcision" },
   ];
 
   return (
-    <footer className="bg-gray-800 text-white py-10 px-5 md:px-20">
+    <footer className="bg-gray-800 text-white py-10 px-5 md:px-20 relative">
+      {/* Chat Icon (Fixed on the right side) */}
+      {/* <div className="fixed bottom-8 right-8 z-50">
+      <button
+      className="fixed bottom-6 right-6 bg-blue-500 text-white p-4 rounded-full shadow-lg hover:bg-blue-600 transition"
+      onClick={() => navigate("/chat")} // Navigate to Chat page
+    >
+      <FaCommentDots size={24} />
+    </button>
+      </div> */}
+
+      {/* Footer Content */}
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
         {/* Left Section - Clinic Info */}
         <div>
           <h2 className="text-2xl font-bold text-blue-400 mb-3 bg-white p-4 rounded-xl">
             <img
-              src="https://www.drnirenrao.com/images/logo.png"
-              alt="Dr. Niren Rao Logo"
+              src="logo2.png"
+              alt="Dr. Kunjan Kumar Logo"
             />
           </h2>
           <p className="text-sm text-gray-300">
@@ -44,7 +57,7 @@ export default function Footer() {
           </p>
           <div className="flex space-x-4 mt-4">
             <a
-              href="https://www.facebook.com/delhiurologyhospital"
+              href="https://www.facebook.com/Patnaurologyhospital"
               className="text-gray-300 hover:text-blue-400"
             >
               <FaFacebookF size={20} />
@@ -56,7 +69,7 @@ export default function Footer() {
               <FaYoutube size={22} />
             </a>
             <a
-              href="https://www.instagram.com/delhiurologyhospital/"
+              href="https://www.instagram.com/Patnaurologyhospital/"
               className="text-gray-300 hover:text-pink-500"
             >
               <FaInstagram size={22} />
@@ -67,12 +80,12 @@ export default function Footer() {
         {/* Middle Section - Clinic Address */}
         <div>
           <h3 className="text-lg font-bold mb-3">
-            DR. NIREN RAO UROLOGY CLINIC
+            DR. KUNJAN KUMAR UROLOGY CLINIC
           </h3>
           <p className="flex items-start text-sm">
             <FaMapMarkerAlt className="mr-2 mt-1 text-blue-400" />E 33,
             Paryavaran Complex, IGNOU Road, Z Morh, Near Labour Chowk, Near
-            Saket Metro Station, New Delhi - 110068
+            Saket Metro Station, New Patna - 110068
           </p>
           <p className="flex items-center mt-2 text-sm">
             <FaPhoneAlt className="mr-2 text-green-400" />
@@ -80,7 +93,7 @@ export default function Footer() {
           </p>
           <p className="flex items-center mt-2 text-sm">
             <FaEnvelope className="mr-2 text-red-400" />
-            drnirenrao@gmail.com
+            kunjankumar@gmail.com
           </p>
           <p className="flex items-center mt-2 text-sm">
             <FaClock className="mr-2 text-yellow-400" />
@@ -104,26 +117,42 @@ export default function Footer() {
 
         {/* Top Reviews Section */}
         <div>
-          <h3 className="text-lg font-bold mb-3">TOP REVIEWS</h3>
-          <button className=" cursor-pointer   border border-blue-400 text-blue-400 py-2 px-4 rounded hover:bg-blue-500 hover:text-white transition">
-            VIEW ALL →
-          </button>
+          <h3 className="text-lg font-bold mb-3">Book Appointment</h3>
+          <Link
+            to={"/appointment"}
+            className="cursor-pointer border border-blue-400 text-blue-400 py-2 px-4 rounded hover:bg-blue-500 hover:text-white transition"
+          >
+            Book Appointment →
+          </Link>
+          <br></br>
+          <br></br>
+
+          <h3 className="text-lg font-bold mb-3">Login</h3>
+          <Link
+            to={"/login"}
+            className="cursor-pointer border border-blue-400 text-blue-400 py-2 px-4 rounded hover:bg-blue-500 hover:text-white transition"
+          >
+            Login →
+          </Link>
+          <br></br>
+          <br></br>
+
+          <h3 className="text-lg font-bold mb-3">Services</h3>
+          <Link
+            to={"/services"}
+            className="cursor-pointer border border-blue-400 text-blue-400 py-2 px-4 rounded hover:bg-blue-500 hover:text-white transition"
+          >
+            All Services →
+          </Link>
         </div>
       </div>
-      <div className="width:50px">
+
       {/* Admin Panel Link with Icon */}
-      <Link
-        to="/admin"
-        className="flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-gray-50 transition width:50px"
-      >
-        <UserCog size={20} className="text-gray-700" /> {/* Admin icon */}
-        
-      </Link>
-    </div>
+
       {/* Bottom Navigation Links */}
-      <div className="border-t border-gray-700  mt-8  pt-4 text-sm text-gray-300 text-center flex flex-wrap justify-center space-x-2">
+      <div className="border-t border-gray-700 mt-8 pt-4 text-sm text-gray-300 text-center flex flex-wrap justify-center space-x-2">
         <Link to="/" className="hover:text-blue-400">
-          Home, 
+          Home,
         </Link>
         <Link to="/aboutDoctor" className="hover:text-blue-400">
           About Doctor,
@@ -132,9 +161,12 @@ export default function Footer() {
           Infertility,
         </Link>
         <Link to="/circumcision" className="hover:text-blue-400">
-         Circumcision,
+          Circumcision,
         </Link>
-        <Link to="/services/erectileDysfunction" className="hover:text-blue-400">
+        <Link
+          to="/services/erectileDysfunction"
+          className="hover:text-blue-400"
+        >
           ErectileDysfunction,
         </Link>
         <Link to="/aboutClinic" className="hover:text-blue-400">
@@ -164,24 +196,24 @@ export default function Footer() {
       </div>
 
       {/* Location Links */}
-      <div className="text-sm text-gray-300 text-center mt-4 space-x-2 bg-black p-2 ">
+      <div className="text-sm text-gray-300 text-center mt-4 space-x-2 bg-black p-2">
         <span>Saket |</span>
         <span>Malviya Nagar |</span>
         <span>Green Park |</span>
         <span>Greater Kailash |</span>
         <span>Govind Puri |</span>
-        <span>South Delhi |</span>
-        <span>West Delhi |</span>
+        <span>South Patna |</span>
+        <span>West Patna |</span>
         <span>Gurgaon |</span>
         <span>Noida |</span>
         <span>Faridabad |</span>
-        <span>East Delhi |</span>
+        <span>East Patna |</span>
         <span>Hauz Khas</span>
       </div>
 
       {/* Disclaimer Section */}
       <div className="text-xs text-gray-400 text-center mt-4 px-5 md:px-20">
-        *Disclaimer: The content on this website (www.drnirenrao.com) is purely
+        *Disclaimer: The content on this website (www.kunjankumar.com) is purely
         for the purpose of educating and creating awareness about various health
         concerns. However, any information published here shall not be
         considered as a prescription from a professional urologist. The results
@@ -190,8 +222,9 @@ export default function Footer() {
       </div>
 
       <div className="text-xs text-gray-400 text-center mt-4 px-5 md:px-20">
-      Copyright © 2025-, Dr. Niren Rao's Urology Practice. All rights reserved | Powered by Adonomics
-        </div>
+        Copyright © 2025-, Dr. Kunjan Kumar's Urology Practice. All rights
+        reserved | Powered by Adonomics
+      </div>
     </footer>
   );
 }

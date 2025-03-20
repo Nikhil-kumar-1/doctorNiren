@@ -1,5 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import {Helmet, HelmetProvider } from "react-helmet-async";
+
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
@@ -26,83 +28,116 @@ import ErectileDysfunction from "./components/Services/ErectileDisfunction";
 import Circumcision from "./components/Services/Circumcision";
 import PrivacyPolicy from "./components/Footer/PrivacyPolicy";
 import AdminDashboard from "./components/AdminDasboard";
-import Login from "./components/Login"; // Add Login component
-import ProtectedRoute from "./components/ProtectedRoute"; // Add ProtectedRoute component
+import Login from "./components/Login";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 // Scroll to top on route change
 const ScrollToTop = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    window.scrollTo(0, 0); // Scroll to the top of the page
+    window.scrollTo(0, 0);
   }, [pathname]);
 
-  return null; // This component doesn't render anything
+  return null;
 };
 
 function App() {
   return (
-    <Router>
-      {/* Navbar is always visible */}
-      <Navbar />
+    <HelmetProvider>
+      <Router>
+        {/* Global SEO */}
+       
 
-      {/* Scroll to top on route change */}
-      <ScrollToTop />
+        {/* Navbar is always visible */}
+        <Navbar />
 
-      {/* Main Content */}
-      <Routes>
-        {/* Home Page (Header appears only on Home) */}
-        <Route
-          path="/"
-          element={
-            <>
-              <Header />
-              <About />
-              <Specializations />
-              <AppointmentSection />
-            </>
-          }
-        />
+        {/* Scroll to top on route change */}
+        <ScrollToTop />
 
-        {/* Other Pages */}
-        <Route path="/about" element={<About />} />
-        <Route path="/specialization" element={<Specializations />} />
-        <Route path="/appointment" element={<AppointmentSection />} />
-        <Route path="/aboutDoctor" element={<AboutDoctor />} />
-        <Route path="/aboutClinic" element={<AboutClinic />} />
-        <Route path="/gallery" element={<Gallery />} />
-        <Route path="/contact" element={<ContactUs />} />
-        <Route path="/services/kidneyStone" element={<KidneyStone />} />
-        <Route path="/services/kidney-cancer" element={<KidneyCancer />} />
-        <Route path="/services/kidney-transplant" element={<KidneyTransplant />} />
-        <Route path="/services/bladder-tumor" element={<BladderStone />} />
-        <Route path="/services/bladder-cancer" element={<BladderCancer />} />
-        <Route path="/services/prostate-cancer" element={<ProstateCancer />} />
-        <Route path="/services/prostate-treatment" element={<ProstateTreatment />} />
-        <Route path="/videos" element={<Video />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/blogs" element={<Blog />} />
-        <Route path="/blog/:id" element={<BlogDetails />} />
-        <Route path="/services/infertility" element={<Infertility />} />
-        <Route path="/services/erectileDysfunction" element={<ErectileDysfunction />} />
-        <Route path="/services/circumcision" element={<Circumcision />} />
-        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        {/* Routes */}
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <Helmet>
+                  <title>Home - Kidney & Urology Care</title>
+                  <meta name="description" content="Expert kidney and urology care for all your health needs." />
+                </Helmet>
+                <Header />
+                <About />
+                <Specializations />
+                <AppointmentSection />
+              </>
+            }
+          />
+          <Route
+            path="/about"
+            element={
+              <>
+                <Helmet>
+                  <title>About Us - Meet Our Urology Experts</title>
+                  <meta name="description" content="Learn more about our experienced kidney and urology specialists." />
+                </Helmet>
+                <About />
+              </>
+            }
+          />
+          <Route path="/specialization" element={<Specializations />} />
+          <Route path="/appointment" element={<AppointmentSection />} />
+          <Route path="/aboutDoctor" element={<AboutDoctor />} />
+          <Route path="/aboutClinic" element={<AboutClinic />} />
+          <Route path="/gallery" element={<Gallery />} />
+          <Route path="/contact" element={<ContactUs />} />
 
-        {/* Admin Routes */}
-        <Route path="/login" element={<Login />} />
-        <Route
-          path="/admin"
-          element={
-            <ProtectedRoute>
-              <AdminDashboard />
-            </ProtectedRoute>
-          }
-        />
-      </Routes>
+          {/* Services */}
+          <Route path="/services/kidneyStone" element={<KidneyStone />} />
+          <Route path="/services/kidney-cancer" element={<KidneyCancer />} />
+          <Route path="/services/kidney-transplant" element={<KidneyTransplant />} />
+          <Route path="/services/bladder-tumor" element={<BladderStone />} />
+          <Route path="/services/bladder-cancer" element={<BladderCancer />} />
+          <Route path="/services/prostate-cancer" element={<ProstateCancer />} />
+          <Route path="/services/prostate-treatment" element={<ProstateTreatment />} />
+          <Route path="/services/infertility" element={<Infertility />} />
+          <Route path="/services/erectileDysfunction" element={<ErectileDysfunction />} />
+          <Route path="/services/circumcision" element={<Circumcision />} />
 
-      {/* Footer is always visible */}
-      <Footer />
-    </Router>
+          {/* Video & Blogs */}
+          <Route path="/videos" element={<Video />} />
+          <Route path="/services" element={<Services />} />
+          <Route
+            path="/blogs"
+            element={
+              <>
+                <Blog />
+              </>
+            }
+          />
+          <Route path="/blog/:id" element={<BlogDetails />} />
+
+          {/* Privacy Policy */}
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+
+          {/* Admin Routes */}
+          <Route path="/login" element={<Login />} />
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute>
+                <Helmet>
+                  <title>Admin Dashboard - Manage Website</title>
+                </Helmet>
+                <AdminDashboard />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+
+        {/* Footer is always visible */}
+        <Footer />
+      </Router>
+    </HelmetProvider>
   );
 }
 
